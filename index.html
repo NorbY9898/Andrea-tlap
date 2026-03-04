@@ -2,495 +2,589 @@
 <html lang="hu">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Andrea Büfé — Étlap</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Andrea Büfé – Étlap</title>
 
-  <!-- Premium betűk -->
+  <!-- Betűk (elegáns) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      --cream:#f6f0e6;
-      --cream2:#efe6d8;
-      --ink:#1f1a14;
-      --ink2:rgba(31,26,20,.74);
-      --line:rgba(31,26,20,.14);
-      --accent:#8a5a2b;
-      --shadow: 0 18px 50px rgba(0,0,0,.12);
-      --max: 1200px;
-      --radius: 18px;
+      --bg:#efe7dc;
+      --paper:#f4eee6;
+      --ink:#1a1a1a;
+      --muted:rgba(26,26,26,.68);
+      --line:rgba(26,26,26,.14);
+      --shadow: 0 18px 55px rgba(0,0,0,.12);
+      --radius:22px;
+
+      --topbarH: 74px;      /* FIX NAV magasság */
+      --chipH: 44px;
+
+      --container: 1180px;
     }
 
-    *{box-sizing:border-box}
-    html,body{height:100%}
+    *{ box-sizing:border-box; }
+    html{ scroll-behavior:smooth; }
     body{
       margin:0;
-      background:
-        radial-gradient(1000px 520px at 50% 0%, rgba(138,90,43,.08), transparent 55%),
-        linear-gradient(180deg, var(--cream), var(--cream2));
       color:var(--ink);
       font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      letter-spacing:.1px;
+      background:
+        radial-gradient(900px 600px at 50% 0%, rgba(0,0,0,.06), transparent 55%),
+        linear-gradient(180deg, #f6f0e8, #efe7dc);
+      padding-top: var(--topbarH); /* FIX menü miatt */
     }
-    a{color:inherit; text-decoration:none}
-    button{font:inherit}
-    .container{max-width:var(--max); margin:0 auto; padding:0 22px}
 
-    /* ✅ FIX TOPBAR: görgetésnél se tűnjön el */
+    a{ color:inherit; text-decoration:none; }
+    .container{ max-width: var(--container); margin: 0 auto; padding: 0 22px; }
+
+    /* =========================
+       ✅ FIX FELSŐ SÁV (nem mozog)
+       ========================= */
     .topbar{
-      position: sticky;
-      top: 0;
-      z-index: 999;
+      position: fixed;
+      top:0; left:0; right:0;
+      height: var(--topbarH);
+      z-index: 1000;
+      background: rgba(244,238,230,.92);
       backdrop-filter: blur(10px);
-      background: rgba(246,240,230,.86);
-      border-bottom:1px solid var(--line);
+      border-bottom: 1px solid var(--line);
     }
-    .nav{
-      height:70px;
+
+    .topbar .row{
+      height:100%;
       display:flex;
       align-items:center;
       justify-content:space-between;
-      gap:14px;
+      gap:12px;
     }
+
     .brand{
       display:flex; align-items:center; gap:12px;
       min-width: 220px;
     }
-    .logo{
+    .brand .mark{
       width:34px; height:34px;
       border-radius:10px;
-      border:1px solid rgba(138,90,43,.35);
-      background:
-        radial-gradient(circle at 30% 30%, rgba(176,122,63,.35), transparent 60%),
-        linear-gradient(180deg, rgba(138,90,43,.18), rgba(0,0,0,0));
+      border:1px solid rgba(26,26,26,.22);
+      background: linear-gradient(180deg, rgba(255,255,255,.65), rgba(0,0,0,.03));
       box-shadow: 0 10px 26px rgba(0,0,0,.08);
-      flex: 0 0 auto;
     }
-    /* ✅ Ha logó képet akarsz, ezt használd:
-    .logo{ border:none; background:url("./logo.png") center/cover no-repeat; }
-    */
-
-    .brand .name{
+    .brand .t1{
       font-family:"Cormorant Garamond", serif;
-      font-weight:700;
-      letter-spacing:.6px;
-      font-size:18px;
+      font-weight: 700;
+      letter-spacing:.06em;
+      font-size: 18px;
       line-height:1;
     }
-    .brand .sub{
+    .brand .t2{
       display:block;
-      font-size:11px;
-      color:var(--ink2);
-      margin-top:2px;
+      margin-top:3px;
+      font-size: 11px;
       letter-spacing:.22em;
       text-transform:uppercase;
+      color: rgba(26,26,26,.55);
     }
 
-    .menu{
-      display:flex;
-      align-items:center;
+    /* Desktop kategória menü */
+    .nav{
+      display:flex; align-items:center; gap:22px;
       justify-content:center;
-      gap:22px;
       flex: 1 1 auto;
     }
-    .menu a{
-      font-size:12px;
+    .nav a{
+      font-size: 12px;
       letter-spacing:.22em;
       text-transform:uppercase;
-      color:rgba(31,26,20,.78);
-      padding:10px 8px;
+      color: rgba(26,26,26,.78);
+      padding: 10px 8px;
       position:relative;
-      cursor:pointer;
-      user-select:none;
-      white-space:nowrap;
+      white-space: nowrap;
     }
-    .menu a::after{
+    .nav a::after{
       content:"";
       position:absolute; left:8px; right:8px; bottom:6px;
       height:1px;
-      background: linear-gradient(90deg, transparent, rgba(138,90,43,.85), transparent);
+      background: linear-gradient(90deg, transparent, rgba(26,26,26,.55), transparent);
       opacity:0;
       transform: translateY(4px);
-      transition: .25s ease;
+      transition: .22s ease;
     }
-    .menu a:hover{color:var(--ink)}
-    .menu a:hover::after{opacity:1; transform: translateY(0)}
+    .nav a:hover{ color: rgba(26,26,26,.95); }
+    .nav a:hover::after{ opacity:1; transform: translateY(0); }
 
-    .nav-actions{
+    .actions{
+      display:flex; align-items:center; justify-content:flex-end;
+      gap:10px;
       min-width: 220px;
-      display:flex; align-items:center; justify-content:flex-end; gap:12px;
+      padding-right: 14px; /* ✅ bentebb */
     }
-    .pill{
-      height:40px;
-      padding:0 14px;
-      border-radius:12px;
-      border:1px solid rgba(138,90,43,.40);
-      background: rgba(138,90,43,.08);
-      color:var(--ink);
+    .btn{
+      height: 40px;
+      padding: 0 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(26,26,26,.22);
+      background: rgba(255,255,255,.55);
+      font-size: 12px;
       letter-spacing:.18em;
       text-transform:uppercase;
-      font-size:12px;
       cursor:pointer;
-      transition:.2s ease;
-      white-space:nowrap;
+      transition:.18s ease;
+      white-space: nowrap;
     }
-    .pill:hover{
-      background: rgba(138,90,43,.14);
-      transform: translateY(-1px);
-      box-shadow: 0 14px 30px rgba(0,0,0,.10);
+    .btn:hover{ transform: translateY(-1px); box-shadow: 0 14px 30px rgba(0,0,0,.08); }
+
+    /* =========================
+       HERO (a képek az index mellé kerülnek, NEM assets!)
+       ========================= */
+    .hero{
+      position: relative;
+      min-height: 360px;
+      border-bottom: 1px solid var(--line);
+      background:
+        radial-gradient(900px 520px at 50% 35%, rgba(0,0,0,.10), rgba(0,0,0,.45)),
+        url("menu-hero.jpg") center/cover no-repeat; /* ✅ ITT A FÁJLNÉV */
+      display:grid;
+      place-items:center;
+      padding: 28px 0;
     }
 
-    /* HERO */
-    .hero{
-      position:relative;
-      height: 340px;
-      overflow:hidden;
-      border-bottom:1px solid var(--line);
-    }
-    .hero-bg{
-      position:absolute; inset:0;
-      background: url("./etlap-hero.jpg") center/cover no-repeat; /* ✅ CSERÉLD KÉPNEVET */
-      transform: scale(1.02);
-      filter: contrast(1.02) saturate(.98);
-    }
-    .hero::before{
-      content:"";
-      position:absolute; inset:-40px;
-      background:
-        radial-gradient(800px 420px at 50% 35%, rgba(246,240,230,.22), rgba(31,26,20,.48) 55%, rgba(31,26,20,.62) 85%),
-        linear-gradient(180deg, rgba(31,26,20,.28), rgba(31,26,20,.12) 40%, rgba(31,26,20,.36));
-      pointer-events:none;
-      z-index:1;
-    }
-    .hero-center{
-      position:absolute;
-      left:50%; top:52%;
-      transform: translate(-50%, -50%);
-      z-index:2;
-      width:min(860px, calc(100% - 44px));
-      text-align:center;
-      padding: 22px 22px 18px;
+    .hero .panel{
+      width: min(820px, calc(100% - 44px));
+      background: rgba(244,238,230,.92);
+      border: 1px solid rgba(26,26,26,.14);
       border-radius: 22px;
-      border:1px solid rgba(246,240,230,.55);
-      background: rgba(246,240,230,.70);
       box-shadow: var(--shadow);
+      text-align:center;
+      padding: 22px 18px;
     }
     .kicker{
-      font-size:12px;
-      letter-spacing:.22em;
-      text-transform:uppercase;
-      color:rgba(31,26,20,.70);
-      margin-bottom:8px;
-    }
-    .hero-title{
-      font-family:"Cormorant Garamond", serif;
-      font-weight:700;
-      font-size: 46px;
-      line-height: .95;
-      letter-spacing:.10em;
-      margin:0;
-      text-transform:uppercase;
-    }
-    .hero-text{
-      margin:12px auto 0;
-      max-width: 680px;
-      font-size: 13px;
-      line-height: 1.65;
-      color: rgba(31,26,20,.74);
-    }
-
-    /* SECTION HEAD */
-    .section-head{
-      padding: 42px 0 18px;
-      text-align:center;
-    }
-    .section-head .small{
-      font-size:12px;
-      letter-spacing:.22em;
-      text-transform:uppercase;
-      color:rgba(31,26,20,.62);
-    }
-    .section-head h2{
-      margin:10px 0 0;
-      font-family:"Cormorant Garamond", serif;
-      font-size: 34px;
-      letter-spacing:.18em;
-      font-weight:700;
-      text-transform:uppercase;
-    }
-
-    /* CATEGORY */
-    .category{
-      padding: 22px 0 54px;
-      border-top:1px solid var(--line);
-      scroll-margin-top: 90px; /* ✅ sticky menü miatt, ne takarja ki */
-    }
-    .category .cat-title{
-      display:flex;
-      align-items:baseline;
-      justify-content:space-between;
-      gap:14px;
-      padding: 18px 0 16px;
-    }
-    .category h3{
-      margin:0;
-      font-family:"Cormorant Garamond", serif;
-      font-size: 26px;
-      letter-spacing:.14em;
-      text-transform:uppercase;
-    }
-    .category .hint{
-      color: rgba(31,26,20,.62);
       font-size: 12px;
-      letter-spacing:.12em;
+      letter-spacing:.22em;
+      text-transform:uppercase;
+      color: rgba(26,26,26,.65);
+      margin-bottom: 6px;
+    }
+    .hero h1{
+      margin: 0;
+      font-family:"Cormorant Garamond", serif;
+      font-weight: 700;
+      letter-spacing:.18em;
+      font-size: 44px;
+      line-height: 1;
+    }
+    .hero p{
+      margin: 10px auto 0;
+      max-width: 560px;
+      font-size: 13px;
+      color: rgba(26,26,26,.70);
+      line-height: 1.6;
+    }
+
+    /* =========================
+       MOBIL KATEGÓRIA SÁV (sticky chips)
+       ========================= */
+    .mobile-chips{
+      display:none;
+      position: sticky;
+      top: var(--topbarH);
+      z-index: 900;
+      background: rgba(244,238,230,.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+    .chips{
+      display:flex;
+      gap:10px;
+      padding: 10px 12px;
+      overflow:auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .chips::-webkit-scrollbar{ display:none; }
+
+    .chip{
+      flex: 0 0 auto;
+      height: var(--chipH);
+      padding: 0 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(26,26,26,.18);
+      background: rgba(255,255,255,.55);
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-size: 12px;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      color: rgba(26,26,26,.75);
+      transition:.18s ease;
+      white-space: nowrap;
+    }
+    .chip:hover{ transform: translateY(-1px); }
+    .chip.active{
+      border-color: rgba(26,26,26,.45);
+      color: rgba(26,26,26,.95);
+      background: rgba(255,255,255,.80);
+    }
+
+    /* =========================
+       TARTALOM
+       ========================= */
+    .section{
+      padding: 34px 0 10px;
+      background: linear-gradient(180deg, rgba(244,238,230,.65), rgba(239,231,220,.55));
+    }
+
+    .title-row{
+      text-align:center;
+      padding: 16px 0 6px;
+    }
+    .title-row .small{
+      font-size: 12px;
+      letter-spacing:.22em;
+      text-transform:uppercase;
+      color: rgba(26,26,26,.55);
+    }
+    .title-row h2{
+      margin: 10px 0 0;
+      font-family:"Cormorant Garamond", serif;
+      font-weight: 700;
+      letter-spacing:.22em;
+      font-size: 30px;
+    }
+    .divider{
+      margin: 18px auto 0;
+      width: min(680px, 90%);
+      height: 1px;
+      background: rgba(26,26,26,.16);
+    }
+
+    .block{
+      padding: 30px 0 14px;
+    }
+    .block h3{
+      margin: 0 0 12px;
+      font-family:"Cormorant Garamond", serif;
+      font-weight: 700;
+      letter-spacing:.18em;
+      font-size: 20px;
       text-transform:uppercase;
     }
 
-    /* GRID CARDS */
+    /* ✅ 6 elem / kategória: reszponzív rács */
     .grid{
       display:grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
+      gap: 18px;
+      padding-bottom: 18px;
     }
+
     .card{
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.50);
-      border-radius: var(--radius);
+      background: rgba(255,255,255,.55);
+      border: 1px solid rgba(26,26,26,.12);
+      border-radius: 20px;
       overflow:hidden;
-      box-shadow: var(--shadow);
-      transition: transform .2s ease, box-shadow .2s ease;
+      box-shadow: 0 10px 28px rgba(0,0,0,.06);
+      transition: .18s ease;
     }
-    .card:hover{
-      transform: translateY(-2px);
-      box-shadow: 0 22px 60px rgba(0,0,0,.14);
-    }
+    .card:hover{ transform: translateY(-2px); box-shadow: 0 16px 40px rgba(0,0,0,.10); }
+
     .thumb{
-      height: 170px;
-      background: rgba(31,26,20,.12);
+      height: 190px;
       background-size: cover;
-      background-position:center;
-      position:relative;
+      background-position: center;
+      background-repeat: no-repeat;
+      /* ha a kép nem tölt be, legyen elegáns placeholder */
+      background-color: rgba(0,0,0,.08);
     }
-    .thumb::after{
-      content:"";
-      position:absolute; inset:0;
-      background: radial-gradient(700px 220px at 30% 50%, rgba(0,0,0,.00), rgba(0,0,0,.18));
-    }
-    .body{
+
+    .info{
       padding: 14px 14px 16px;
       display:flex;
-      align-items:flex-start;
       justify-content:space-between;
       gap:12px;
+      align-items:flex-start;
     }
     .name{
-      font-weight:600;
-      letter-spacing:.02em;
+      font-weight: 700;
       font-size: 13px;
-      line-height:1.35;
+      letter-spacing:.06em;
+      text-transform:uppercase;
     }
     .desc{
-      margin-top:6px;
-      color: rgba(31,26,20,.62);
+      margin-top: 6px;
       font-size: 12px;
-      line-height:1.55;
+      color: rgba(26,26,26,.62);
+      line-height: 1.45;
     }
     .price{
       font-family:"Cormorant Garamond", serif;
-      font-weight:700;
-      color: var(--accent);
+      font-weight: 700;
+      font-size: 18px;
       letter-spacing:.06em;
-      white-space:nowrap;
-      font-size: 16px;
-      margin-top: 1px;
+      white-space: nowrap;
     }
 
-    /* FOOTER */
+    /* ✅ FIX topbar miatt anchor ugrás ne takarjon */
+    section[id]{ scroll-margin-top: calc(var(--topbarH) + 14px); }
+
     footer{
-      border-top:1px solid var(--line);
       padding: 26px 0;
-      color: rgba(31,26,20,.62);
+      border-top:1px solid var(--line);
+      color: rgba(26,26,26,.58);
       font-size: 12px;
-      background: rgba(246,240,230,.85);
-    }
-    .foot{
-      display:flex; gap:14px; flex-wrap:wrap;
-      align-items:center; justify-content:space-between;
+      text-align:center;
+      background: rgba(244,238,230,.55);
     }
 
-    /* Responsive */
+    /* =========================
+       ✅ TELEFON / TABLET optimalizálás
+       ========================= */
     @media (max-width: 980px){
-      .menu{display:none}
-      .grid{grid-template-columns: repeat(2, 1fr);}
-      .hero{height: 360px;}
-      .hero-title{font-size:40px}
+      .nav{ display:none; }
+      .mobile-chips{ display:block; }
+      .brand{ min-width:auto; }
+      .actions{ min-width:auto; padding-right: 10px; }
+      .hero{ min-height: 320px; }
+      .hero h1{ font-size: 38px; }
+      .grid{ grid-template-columns: repeat(2, 1fr); }
+      .thumb{ height: 170px; }
     }
     @media (max-width: 560px){
-      .grid{grid-template-columns: 1fr;}
-      .hero-title{font-size:34px}
+      :root{ --topbarH: 70px; }
+      body{ padding-top: var(--topbarH); }
+      .btn{ padding: 0 12px; height: 38px; border-radius: 12px; }
+      .hero .panel{ padding: 18px 14px; }
+      .hero h1{ font-size: 34px; }
+      .grid{ grid-template-columns: 1fr; }
+      .thumb{ height: 185px; }
     }
   </style>
 </head>
 
 <body>
-  <!-- TOP NAV -->
-  <div class="topbar">
+
+  <!-- ✅ FIX FELSŐ SÁV -->
+  <header class="topbar">
     <div class="container">
-      <div class="nav">
-        <a class="brand" href="javascript:void(0)" aria-label="Vissza a főoldalra" id="brandBack">
-          <div class="logo" aria-hidden="true"></div>
+      <div class="row">
+        <a class="brand" href="#top" aria-label="Andrea Büfé - Étlap">
+          <div class="mark" aria-hidden="true"></div>
           <div>
-            <div class="name">Andrea Büfé</div>
-            <span class="sub">Étlap</span>
+            <div class="t1">Andrea Büfé</div>
+            <span class="t2">Étlap</span>
           </div>
         </a>
 
-        <!-- ✅ KATEGÓRIA GOMBOK (instant görget) -->
-        <nav class="menu" aria-label="Étlap kategóriák">
-          <a data-scroll="#halas">Halas ételek</a>
-          <a data-scroll="#salatak">Saláták</a>
-          <a data-scroll="#hamburgerek">Hamburgerek</a>
+        <!-- Desktop kategóriák -->
+        <nav class="nav" aria-label="Kategóriák (desktop)">
+          <a href="#halas">Halas ételek</a>
+          <a href="#salatak">Saláták</a>
+          <a href="#hamburgerek">Hamburgerek</a>
         </nav>
 
-        <div class="nav-actions">
-          <!-- ✅ FŐOLDAL: az előző oldalra visz vissza -->
-          <button class="pill" id="backHome">Főoldal</button>
+        <div class="actions">
+          <!-- ✅ IDE ÍRD A FŐOLDAL LINKET (pl. index.html) -->
+          <a class="btn" href="PASTE_FOOLDA L_LINK_HERE">Főoldal</a>
         </div>
       </div>
+    </div>
+  </header>
+
+  <!-- ✅ Mobil kategória “chip” sáv -->
+  <div class="mobile-chips" aria-label="Kategóriák (mobil)">
+    <div class="chips">
+      <a class="chip" href="#halas" data-chip="halas">Halas ételek</a>
+      <a class="chip" href="#salatak" data-chip="salatak">Saláták</a>
+      <a class="chip" href="#hamburgerek" data-chip="hamburgerek">Hamburgerek</a>
     </div>
   </div>
 
   <!-- HERO -->
   <section class="hero" id="top">
-    <div class="hero-bg" aria-hidden="true"></div>
-
-    <div class="hero-center">
+    <div class="panel">
       <div class="kicker">Andrea Büfé</div>
-      <h1 class="hero-title">ÉTLAP</h1>
-      <p class="hero-text">
-        Válassz kategóriát fent, és egy kattintással a megfelelő részhez ugrunk.
-      </p>
+      <h1>ÉTLAP</h1>
+      <p>Válassz kategóriát fent, és egy kattintással a megfelelő részhez ugrunk.</p>
     </div>
   </section>
 
-  <div class="container">
-    <div class="section-head">
-      <div class="small">Kategóriák</div>
-      <h2>Halas · Saláták · Hamburgerek</h2>
-    </div>
+  <!-- Kategória címsor -->
+  <section class="section">
+    <div class="container">
+      <div class="title-row">
+        <div class="small">Kategóriák</div>
+        <h2>HALAS · SALÁTÁK · HAMBURGEREK</h2>
+        <div class="divider"></div>
+      </div>
 
-    <!-- HALAS (7) -->
-    <section class="category" id="halas">
-      <div class="cat-title">
+      <!-- =========================
+           HALAS ÉTELEK (6 kép: hal-01.jpg ... hal-06.jpg)
+           ========================= -->
+      <section class="block" id="halas">
         <h3>Halas ételek</h3>
-        <div class="hint"></div>
-      </div>
 
-      <div class="grid">
-        <article class="card"><div class="thumb" style='background-image:url("./hal-01.jpg");'></div><div class="body"><div><div class="name">HAL-01 NÉV </div><div class="desc">Rövid leírás (opcionális).</div></div><div class="price">0 Ft</div></div></article>
-        <article class="card"><div class="thumb" style='background-image:url("./hal-02.jpg");'></div><div class="body"><div><div class="name">HAL-02 NÉV </div><div class="desc">Rövid leírás (opcionális).</div></div><div class="price">0 Ft</div></div></article>
-        <article class="card"><div class="thumb" style='background-image:url("./hal-03.jpg");'></div><div class="body"><div><div class="name">HAL-03 NÉV </div><div class="desc">Rövid leírás (opcionális).</div></div><div class="price">0 Ft</div></div></article>
-        <article class="card"><div class="thumb" style='background-image:url("./hal-04.jpg");'></div><div class="body"><div><div class="name">HAL-04 NÉV </div><div class="desc">Rövid leírás (opcionális).</div></div><div class="price">0 Ft</div></div></article>
-        <article class="card"><div class="thumb" style='background-image:url("./hal-05.jpg");'></div><div class="body"><div><div class="name">HAL-05 NÉV </div><div class="desc">Rövid leírás (opcionális).</div></div><div class="price">0 Ft</div></div></article>
-        <article class="card"><div class="thumb" style='background-image:url("./hal-06.jpg");'></div><div class="body"><div><div class="name">HAL-06 NÉV </div><div class="desc">Rövid leírás (opcionális).</div></div><div class="price">0 Ft</div></div></article>
-        <article class="card"><div class="thumb" style='background-image:url("./hal-07.jpg");'></div><div class="body"><div><div class="name">HAL-07 NÉV </div><div class="desc">Rövid leírás (opcionális).</div></div><div class="price">0 Ft</div></div></article>
-      </div>
-    </section>
+        <div class="grid">
+          <div class="card">
+            <div class="thumb" style="background-image:url('hal-01.jpg')"></div>
+            <div class="info"><div style="min-width:0"><div class="name">HAL-01 NÉV</div><div class="desc">Rövid leírás (opcionális).</div></div><div class="price">0 Ft</div></div>
+          </div>
 
-    <!-- SALÁTÁK (5) -->
-    <section class="category" id="salatak">
-      <div class="cat-title">
+          <div class="card">
+            <div class="thumb" style="background-image:url('hal-02.jpg')"></div>
+            <div class="info"><div style="min-width:0"><div class="name">HAL-02 NÉV</div><div class="desc">Rövid leírás (opcionális).</div></div><div class="price">0 Ft</div></div>
+          </div>
+
+          <div class="card">
+            <div class="thumb" style="background-image:url('hal-03.jpg')"></div>
+            <div class="info"><div style="min-width:0"><div class="name">HAL-03 NÉV</div><div class="desc">Rövid leírás (opcionális).</div></div><div class="price">0 Ft</div></div>
+          </div>
+
+          <div class="card">
+            <div class="thumb" style="background-image:url('hal-04.jpg')"></div>
+            <div class="info"><div style="min-width:0"><div class="name">HAL-04 NÉV</div><div class="desc">Rövid leírás (opcionális).</div></div><div class="price">0 Ft</div></div>
+          </div>
+
+          <div class="card">
+            <div class="thumb" style="background-image:url('hal-05.jpg')"></div>
+            <div class="info"><div style="min-width:0"><div class="name">HAL-05 NÉV</div><div class="desc">Rövid leírás (opcionális).</div></div><div class="price">0 Ft</div></div>
+          </div>
+
+          <div class="card">
+            <div class="thumb" style="background-image:url('hal-06.jpg')"></div>
+            <div class="info"><div style="min-width:0"><div class="name">HAL-06 NÉV</div><div class="desc">Rövid leírás (opcionális).</div></div><div class="price">0 Ft</div></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================
+           SALÁTÁK (6 kép: sal-01.jpg ... sal-06.jpg)
+           ========================= -->
+      <section class="block" id="salatak">
         <h3>Saláták</h3>
-        <div class="hint"></div>
-      </div>
 
-      <div class="grid">
-        <article class="card"><div class="thumb" style='background-image:url("./sal-01.jpg");'></div><div class="body"><div><div class="name">Csirke melles saláta</div><div class="desc">Rövid leírás (opcionális).</div></div><div class="price">0 Ft</div></div></article>
-        <article class="card"><div class="thumb" style='background-image:url("./sal-02.jpg");'></div><div class="body"><div><div class="name">SAL-02 NÉV </div><div class="desc">Rövid leírás (opcionális).</div></div><div class="price">0 Ft</div></div></article>
-        <article class="card"><div class="thumb" style='background-image:url("./sal-03.jpg");'></div><div class="body"><div><div class="name">SAL-03 NÉV </div><div class="desc">Rövid leírás (opcionális).</div></div><div class="price">0 Ft</div></div></article>
-        <article class="card"><div class="thumb" style='background-image:url("./sal-04.jpg");'></div><div class="body"><div><div class="name">SAL-04 NÉV </div><div class="desc">Rövid leírás (opcionális).</div></div><div class="price">0 Ft</div></div></article>
-        <article class="card"><div class="thumb" style='background-image:url("./sal-05.jpg");'></div><div class="body"><div><div class="name">SAL-05 NÉV </div><div class="desc">Rövid leírás (opcionális).</div></div><div class="price">0 Ft</div></div></article>
-      </div>
-    </section>
+        <div class="grid">
+          <div class="card">
+            <div class="thumb" style="background-image:url('sal-01.jpg')"></div>
+            <div class="info"><div style="min-width:0"><div class="name">SAL-01 NÉV</div><div class="desc">Rövid leírás (opcionális).</div></div><div class="price">0 Ft</div></div>
+          </div>
 
-    <!-- HAMBURGEREK (10) -->
-    <section class="category" id="hamburgerek">
-      <div class="cat-title">
+          <div class="card">
+            <div class="thumb" style="background-image:url('sal-02.jpg')"></div>
+            <div class="info"><div style="min-width:0"><div class="name">SAL-02 NÉV</div><div class="desc">Rövid leírás (opcionális).</div></div><div class="price">0 Ft</div></div>
+          </div>
+
+          <div class="card">
+            <div class="thumb" style="background-image:url('sal-03.jpg')"></div>
+            <div class="info"><div style="min-width:0"><div class="name">SAL-03 NÉV</div><div class="desc">Rövid leírás (opcionális).</div></div><div class="price">0 Ft</div></div>
+          </div>
+
+          <div class="card">
+            <div class="thumb" style="background-image:url('sal-04.jpg')"></div>
+            <div class="info"><div style="min-width:0"><div class="name">SAL-04 NÉV</div><div class="desc">Rövid leírás (opcionális).</div></div><div class="price">0 Ft</div></div>
+          </div>
+
+          <div class="card">
+            <div class="thumb" style="background-image:url('sal-05.jpg')"></div>
+            <div class="info"><div style="min-width:0"><div class="name">SAL-05 NÉV</div><div class="desc">Rövid leírás (opcionális).</div></div><div class="price">0 Ft</div></div>
+          </div>
+
+          <div class="card">
+            <div class="thumb" style="background-image:url('sal-06.jpg')"></div>
+            <div class="info"><div style="min-width:0"><div class="name">SAL-06 NÉV</div><div class="desc">Rövid leírás (opcionális).</div></div><div class="price">0 Ft</div></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================
+           HAMBURGEREK (6 kép: ham-01.jpg ... ham-06.jpg)
+           ========================= -->
+      <section class="block" id="hamburgerek">
         <h3>Hamburgerek</h3>
-        <div class="hint"></div>
-      </div>
 
-      <div class="grid">
-        <article class="card"><div class="thumb" style='background-image:url("./bur-01.jpg");'></div><div class="body"><div><div class="name">Sajt buresz </div><div class="desc">Rövid leírás (opcionális).</div></div><div class="price">0 Ft</div></div></article>
-        <article class="card"><div class="thumb" style='background-image:url("./bur-02.jpg");'></div><div class="body"><div><div class="name">BUR-02 NÉV </div><div class="desc">Rövid leírás (opcionális).</div></div><div class="price">0 Ft</div></div></article>
-        <article class="card"><div class="thumb" style='background-image:url("./bur-03.jpg");'></div><div class="body"><div><div class="name">BUR-03 NÉV </div><div class="desc">Rövid leírás (opcionális).</div></div><div class="price">0 Ft</div></div></article>
-        <article class="card"><div class="thumb" style='background-image:url("./bur-04.jpg");'></div><div class="body"><div><div class="name">BUR-04 NÉV </div><div class="desc">Rövid leírás (opcionális).</div></div><div class="price">0 Ft</div></div></article>
-        <article class="card"><div class="thumb" style='background-image:url("./bur-05.jpg");'></div><div class="body"><div><div class="name">BUR-05 NÉV </div><div class="desc">Rövid leírás (opcionális).</div></div><div class="price">0 Ft</div></div></article>
-        <article class="card"><div class="thumb" style='background-image:url("./bur-06.jpg");'></div><div class="body"><div><div class="name">BUR-06 NÉV </div><div class="desc">Rövid leírás (opcionális).</div></div><div class="price">0 Ft</div></div></article>
-        <article class="card"><div class="thumb" style='background-image:url("./bur-07.jpg");'></div><div class="body"><div><div class="name">BUR-07 NÉV </div><div class="desc">Rövid leírás (opcionális).</div></div><div class="price">0 Ft</div></div></article>
-        <article class="card"><div class="thumb" style='background-image:url("./bur-08.jpg");'></div><div class="body"><div><div class="name">BUR-08 NÉV </div><div class="desc">Rövid leírás (opcionális).</div></div><div class="price">0 Ft</div></div></article>
-        <article class="card"><div class="thumb" style='background-image:url("./bur-09.jpg");'></div><div class="body"><div><div class="name">BUR-09 NÉV </div><div class="desc">Rövid leírás (opcionális).</div></div><div class="price">0 Ft</div></div></article>
-        <article class="card"><div class="thumb" style='background-image:url("./bur-10.jpg");'></div><div class="body"><div><div class="name">BUR-10 NÉV </div><div class="desc">Rövid leírás (opcionális).</div></div><div class="price">0 Ft</div></div></article>
-      </div>
-    </section>
-  </div>
+        <div class="grid">
+          <div class="card">
+            <div class="thumb" style="background-image:url('ham-01.jpg')"></div>
+            <div class="info"><div style="min-width:0"><div class="name">HAM-01 NÉV</div><div class="desc">Rövid leírás (opcionális).</div></div><div class="price">0 Ft</div></div>
+          </div>
+
+          <div class="card">
+            <div class="thumb" style="background-image:url('ham-02.jpg')"></div>
+            <div class="info"><div style="min-width:0"><div class="name">HAM-02 NÉV</div><div class="desc">Rövid leírás (opcionális).</div></div><div class="price">0 Ft</div></div>
+          </div>
+
+          <div class="card">
+            <div class="thumb" style="background-image:url('ham-03.jpg')"></div>
+            <div class="info"><div style="min-width:0"><div class="name">HAM-03 NÉV</div><div class="desc">Rövid leírás (opcionális).</div></div><div class="price">0 Ft</div></div>
+          </div>
+
+          <div class="card">
+            <div class="thumb" style="background-image:url('ham-04.jpg')"></div>
+            <div class="info"><div style="min-width:0"><div class="name">HAM-04 NÉV</div><div class="desc">Rövid leírás (opcionális).</div></div><div class="price">0 Ft</div></div>
+          </div>
+
+          <div class="card">
+            <div class="thumb" style="background-image:url('ham-05.jpg')"></div>
+            <div class="info"><div style="min-width:0"><div class="name">HAM-05 NÉV</div><div class="desc">Rövid leírás (opcionális).</div></div><div class="price">0 Ft</div></div>
+          </div>
+
+          <div class="card">
+            <div class="thumb" style="background-image:url('ham-06.jpg')"></div>
+            <div class="info"><div style="min-width:0"><div class="name">HAM-06 NÉV</div><div class="desc">Rövid leírás (opcionális).</div></div><div class="price">0 Ft</div></div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </section>
 
   <footer>
-    <div class="container">
-      <div class="foot">
-        <div>© <span id="year"></span> Andrea Büfé — Minden jog fenntartva.</div>
-        <div style="display:flex; gap:14px; align-items:center; flex-wrap:wrap;">
-          <a data-scroll="#top" style="cursor:pointer;">Fel</a>
-          <a data-scroll="#halas" style="cursor:pointer;">Halas</a>
-          <a data-scroll="#salatak" style="cursor:pointer;">Saláták</a>
-          <a data-scroll="#hamburgerek" style="cursor:pointer;">Hamburgerek</a>
-        </div>
-      </div>
-    </div>
+    © <span id="year"></span> Andrea Büfé – Étlap
   </footer>
 
   <script>
-    // év
+    // Év
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    // ✅ Kattintásra instant görgetés
-    document.querySelectorAll("[data-scroll]").forEach(el=>{
-      el.addEventListener("click", ()=>{
-        const sel = el.getAttribute("data-scroll");
-        const target = document.querySelector(sel);
-        if(!target) return;
-        target.scrollIntoView({behavior:"smooth", block:"start"});
-      });
+    // ✅ Mobil chip aktív állapot
+    const chips = Array.from(document.querySelectorAll(".chip"));
+    const sections = ["halas","salatak","hamburgerek"].map(id => document.getElementById(id)).filter(Boolean);
+
+    const setActive = (id) => {
+      chips.forEach(c => c.classList.toggle("active", c.dataset.chip === id));
+    };
+
+    const topbarH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--topbarH')) || 74;
+
+    const io = new IntersectionObserver((entries) => {
+      const visible = entries
+        .filter(e => e.isIntersecting)
+        .sort((a,b) => b.intersectionRatio - a.intersectionRatio)[0];
+      if(visible) setActive(visible.target.id);
+    }, {
+      root: null,
+      threshold: [0.15, 0.25, 0.4, 0.6],
+      rootMargin: `-${topbarH}px 0px -60% 0px`
     });
 
-    // ✅ FŐOLDAL: előző oldalra vissza (nem fix index.html!)
-    function goBackToPrevious(){
-      if (window.history.length > 1) {
-        window.history.back();
-      } else {
-        // Ha direktben nyitották meg (nincs előzmény), fallback:
-        window.location.href = "https://norby9898.github.io/Adnrea-b-f-miniweb/";
-      }
-    }
-    document.getElementById("backHome").addEventListener("click", goBackToPrevious);
-    document.getElementById("brandBack").addEventListener("click", goBackToPrevious);
+    sections.forEach(s => io.observe(s));
+    chips.forEach(c => c.addEventListener("click", () => setActive(c.dataset.chip)));
+    setActive("halas");
   </script>
 
   <!--
-    =========================
-    ✅ KÉPEK HELYE (index.html mellé)
-    =========================
-    HERO: etlap-hero.jpg  <-- CSERÉLD
-    Halas: hal-01.jpg ... hal-07.jpg
-    Saláta: sal-01.jpg ... sal-05.jpg
-    Burger: bur-01.jpg ... bur-10.jpg
+    ✅ MIVEL A KÉPEK AZ index.html MELLÉ KERÜLNEK:
+    - Hero háttér: menu-hero.jpg
+    - Halak: hal-01.jpg ... hal-06.jpg
+    - Saláták: sal-01.jpg ... sal-06.jpg
+    - Hamburgerek: ham-01.jpg ... ham-06.jpg
 
-    A kártyákban ezt cseréld:
-    style='background-image:url("./IDE_A_KÉPNEV.jpg");'
+    ✅ LINK HELYE:
+    - Főoldal gomb: href="PASTE_FOOLDA L_LINK_HERE"
+      (cseréld pl. index.html-re vagy a webcímedre)
   -->
 </body>
-
 </html>
-
