@@ -35,14 +35,14 @@
       background:
         radial-gradient(900px 600px at 50% 0%, rgba(0,0,0,.06), transparent 55%),
         linear-gradient(180deg, #f6f0e8, #efe7dc);
-      padding-top: var(--topbarH); /* FIX menü miatt */
+      padding-top: var(--topbarH);
     }
 
     a{ color:inherit; text-decoration:none; }
     .container{ max-width: var(--container); margin: 0 auto; padding: 0 22px; }
 
     /* =========================
-       ✅ FIX FELSŐ SÁV (nem mozog)
+       FIX TOPBAR
        ========================= */
     .topbar{
       position: fixed;
@@ -53,7 +53,6 @@
       backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--line);
     }
-
     .topbar .row{
       height:100%;
       display:flex;
@@ -64,7 +63,7 @@
 
     .brand{
       display:flex; align-items:center; gap:12px;
-      min-width: 220px;
+      min-width: 240px;
     }
     .brand .mark{
       width:34px; height:34px;
@@ -89,15 +88,17 @@
       color: rgba(26,26,26,.55);
     }
 
-    /* Desktop kategória menü */
+    /* Desktop kategóriák */
     .nav{
-      display:flex; align-items:center; gap:22px;
+      display:flex; align-items:center; gap:18px;
       justify-content:center;
       flex: 1 1 auto;
+      flex-wrap: wrap;
+      line-height: 1;
     }
     .nav a{
-      font-size: 12px;
-      letter-spacing:.22em;
+      font-size: 11px;
+      letter-spacing:.20em;
       text-transform:uppercase;
       color: rgba(26,26,26,.78);
       padding: 10px 8px;
@@ -118,9 +119,8 @@
 
     .actions{
       display:flex; align-items:center; justify-content:flex-end;
-      gap:10px;
-      min-width: 220px;
-      padding-right: 14px; /* ✅ bentebb */
+      min-width: 200px;
+      padding-right: 14px;
     }
     .btn{
       height: 40px;
@@ -138,20 +138,19 @@
     .btn:hover{ transform: translateY(-1px); box-shadow: 0 14px 30px rgba(0,0,0,.08); }
 
     /* =========================
-       HERO (a képek az index mellé kerülnek, NEM assets!)
+       HERO
        ========================= */
     .hero{
       position: relative;
-      min-height: 360px;
+      min-height: 340px;
       border-bottom: 1px solid var(--line);
       background:
         radial-gradient(900px 520px at 50% 35%, rgba(0,0,0,.10), rgba(0,0,0,.45)),
-        url("menu-hero.jpg") center/cover no-repeat; /* ✅ ITT A FÁJLNÉV */
+        url("menu-hero.jpg") center/cover no-repeat;
       display:grid;
       place-items:center;
       padding: 28px 0;
     }
-
     .hero .panel{
       width: min(820px, calc(100% - 44px));
       background: rgba(244,238,230,.92);
@@ -178,14 +177,14 @@
     }
     .hero p{
       margin: 10px auto 0;
-      max-width: 560px;
+      max-width: 620px;
       font-size: 13px;
       color: rgba(26,26,26,.70);
       line-height: 1.6;
     }
 
     /* =========================
-       MOBIL KATEGÓRIA SÁV (sticky chips)
+       MOBIL CHIP MENÜ (sticky)
        ========================= */
     .mobile-chips{
       display:none;
@@ -215,7 +214,6 @@
       background: rgba(255,255,255,.55);
       display:flex;
       align-items:center;
-      gap:10px;
       font-size: 12px;
       letter-spacing:.18em;
       text-transform:uppercase;
@@ -231,13 +229,12 @@
     }
 
     /* =========================
-       TARTALOM
+       SZEKCIÓK
        ========================= */
     .section{
       padding: 34px 0 10px;
       background: linear-gradient(180deg, rgba(244,238,230,.65), rgba(239,231,220,.55));
     }
-
     .title-row{
       text-align:center;
       padding: 16px 0 6px;
@@ -252,12 +249,12 @@
       margin: 10px 0 0;
       font-family:"Cormorant Garamond", serif;
       font-weight: 700;
-      letter-spacing:.22em;
-      font-size: 30px;
+      letter-spacing:.18em;
+      font-size: 28px;
     }
     .divider{
       margin: 18px auto 0;
-      width: min(680px, 90%);
+      width: min(720px, 92%);
       height: 1px;
       background: rgba(26,26,26,.16);
     }
@@ -269,19 +266,18 @@
       margin: 0 0 12px;
       font-family:"Cormorant Garamond", serif;
       font-weight: 700;
-      letter-spacing:.18em;
+      letter-spacing:.14em;
       font-size: 20px;
       text-transform:uppercase;
     }
 
-    /* ✅ 6 elem / kategória: reszponzív rács */
+    /* ✅ 10 elem / kategória */
     .grid{
       display:grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 18px;
       padding-bottom: 18px;
     }
-
     .card{
       background: rgba(255,255,255,.55);
       border: 1px solid rgba(26,26,26,.12);
@@ -297,7 +293,6 @@
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
-      /* ha a kép nem tölt be, legyen elegáns placeholder */
       background-color: rgba(0,0,0,.08);
     }
 
@@ -328,7 +323,6 @@
       white-space: nowrap;
     }
 
-    /* ✅ FIX topbar miatt anchor ugrás ne takarjon */
     section[id]{ scroll-margin-top: calc(var(--topbarH) + 14px); }
 
     footer{
@@ -341,14 +335,18 @@
     }
 
     /* =========================
-       ✅ TELEFON / TABLET optimalizálás
+       ✅ RESPONSIVE
        ========================= */
+    @media (max-width: 1100px){
+      .nav{ gap: 10px; }
+      .nav a{ font-size: 10.5px; letter-spacing:.16em; }
+    }
     @media (max-width: 980px){
       .nav{ display:none; }
       .mobile-chips{ display:block; }
       .brand{ min-width:auto; }
       .actions{ min-width:auto; padding-right: 10px; }
-      .hero{ min-height: 320px; }
+      .hero{ min-height: 300px; }
       .hero h1{ font-size: 38px; }
       .grid{ grid-template-columns: repeat(2, 1fr); }
       .thumb{ height: 170px; }
@@ -367,7 +365,6 @@
 
 <body>
 
-  <!-- ✅ FIX FELSŐ SÁV -->
   <header class="topbar">
     <div class="container">
       <div class="row">
@@ -379,31 +376,39 @@
           </div>
         </a>
 
-        <!-- Desktop kategóriák -->
+        <!-- ✅ ÚJ KATEGÓRIÁK (desktop) -->
         <nav class="nav" aria-label="Kategóriák (desktop)">
-          <a href="#halas">Halas ételek</a>
+          <a href="#frissen">Frissen sültek</a>
+          <a href="#gyros">Gyros</a>
+          <a href="#tortilla">Tortilla</a>
           <a href="#salatak">Saláták</a>
-          <a href="#hamburgerek">Hamburgerek</a>
+          <a href="#wimpi">Wimpi</a>
+          <a href="#gyerek">Gyerek menü</a>
+          <a href="#palacsinta">Palacsinta</a>
+          <a href="#nasik">Nasik</a>
         </nav>
 
         <div class="actions">
-          <!-- ✅ IDE ÍRD A FŐOLDAL LINKET (pl. index.html) -->
           <a class="btn" href="https://norby9898.github.io/Adnrea-b-f-miniweb/">Főoldal</a>
         </div>
       </div>
     </div>
   </header>
 
-  <!-- ✅ Mobil kategória “chip” sáv -->
+  <!-- ✅ ÚJ KATEGÓRIÁK (mobil chip menü) -->
   <div class="mobile-chips" aria-label="Kategóriák (mobil)">
     <div class="chips">
-      <a class="chip" href="#halas" data-chip="halas">Halas ételek</a>
+      <a class="chip" href="#frissen" data-chip="frissen">Frissen</a>
+      <a class="chip" href="#gyros" data-chip="gyros">Gyros</a>
+      <a class="chip" href="#tortilla" data-chip="tortilla">Tortilla</a>
       <a class="chip" href="#salatak" data-chip="salatak">Saláták</a>
-      <a class="chip" href="#hamburgerek" data-chip="hamburgerek">Hamburgerek</a>
+      <a class="chip" href="#wimpi" data-chip="wimpi">Wimpi</a>
+      <a class="chip" href="#gyerek" data-chip="gyerek">Gyerek</a>
+      <a class="chip" href="#palacsinta" data-chip="palacsinta">Palacsinta</a>
+      <a class="chip" href="#nasik" data-chip="nasik">Nasik</a>
     </div>
   </div>
 
-  <!-- HERO -->
   <section class="hero" id="top">
     <div class="panel">
       <div class="kicker">Andrea Büfé</div>
@@ -412,130 +417,185 @@
     </div>
   </section>
 
-  <!-- Kategória címsor -->
   <section class="section">
     <div class="container">
       <div class="title-row">
         <div class="small">Kategóriák</div>
-        <h2>HALAS · SALÁTÁK · HAMBURGEREK</h2>
+        <h2>FRISSEN SÜLTEK · GYROS · TORTILLA · SALÁTÁK · WIMPI · GYEREK · PALACSINTA · NASIK</h2>
         <div class="divider"></div>
       </div>
 
-      <!-- =========================
-           HALAS ÉTELEK (6 kép: hal-01.jpg ... hal-06.jpg)
-           ========================= -->
-      <section class="block" id="halas">
-        <h3>Halas ételek</h3>
+      <!--
+        ======================================================
+        ✅ 10 DB HELY / KATEGÓRIA
+        ✅ KÉPEK NEVE: kategória-rövidítés + sorszám
+           friss-01.jpg ... friss-10.jpg
+           gyros-01.jpg ... gyros-10.jpg
+           tor-01.jpg ... tor-10.jpg
+           sal-01.jpg ... sal-10.jpg
+           wim-01.jpg ... wim-10.jpg
+           gyer-01.jpg ... gyer-10.jpg
+           pal-01.jpg ... pal-10.jpg
+           nas-01.jpg ... nas-10.jpg
+        (A képek az index.html mellé mennek, ugyanabba a mappába!)
+        ======================================================
+      -->
 
+      <!-- FRISSEN SÜLTEK -->
+      <section class="block" id="frissen">
+        <h3>Frissen sültek</h3>
         <div class="grid">
-          <div class="card">
-            <div class="thumb" style="background-image:url('hal-01.jpg')"></div>
-            <div class="info"><div style="min-width:0"><div class="name">HAL-01 NÉV</div><div class="desc">Rövid leírás (opcionális).</div></div><div class="price">0 Ft</div></div>
-          </div>
-
-          <div class="card">
-            <div class="thumb" style="background-image:url('hal-02.jpg')"></div>
-            <div class="info"><div style="min-width:0"><div class="name">HAL-02 NÉV</div><div class="desc">Rövid leírás (opcionális).</div></div><div class="price">0 Ft</div></div>
-          </div>
-
-          <div class="card">
-            <div class="thumb" style="background-image:url('hal-03.jpg')"></div>
-            <div class="info"><div style="min-width:0"><div class="name">HAL-03 NÉV</div><div class="desc">Rövid leírás (opcionális).</div></div><div class="price">0 Ft</div></div>
-          </div>
-
-          <div class="card">
-            <div class="thumb" style="background-image:url('hal-04.jpg')"></div>
-            <div class="info"><div style="min-width:0"><div class="name">HAL-04 NÉV</div><div class="desc">Rövid leírás (opcionális).</div></div><div class="price">0 Ft</div></div>
-          </div>
-
-          <div class="card">
-            <div class="thumb" style="background-image:url('hal-05.jpg')"></div>
-            <div class="info"><div style="min-width:0"><div class="name">HAL-05 NÉV</div><div class="desc">Rövid leírás (opcionális).</div></div><div class="price">0 Ft</div></div>
-          </div>
-
-          <div class="card">
-            <div class="thumb" style="background-image:url('hal-06.jpg')"></div>
-            <div class="info"><div style="min-width:0"><div class="name">HAL-06 NÉV</div><div class="desc">Rövid leírás (opcionális).</div></div><div class="price">0 Ft</div></div>
-          </div>
+          <!-- 01..10 -->
+          <div class="card"><div class="thumb" style="background-image:url('friss-01.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">Rántott Sajt</div><div class="desc">2db r.sajt, sült burgonya, + kérhető kechup, majonéz.</div></div><div class="price">2850 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('friss-02.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">Rántott Csirkemell</div><div class="desc">2db csirkemell, sült burgonya, savanyúság.</div></div><div class="price">3000 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('friss-03.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">Rántott Hagymakarika</div><div class="desc">12db.</div></div><div class="price">1550 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('friss-04.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">Rántott Karfiol</div><div class="desc">20 dkg karfiol, sült burgonya/saláta, + kérhető majonéz, kechup.</div></div><div class="price">2550 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('friss-05.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">Rántott Gomba</div><div class="desc">20 dkg gombafej, sült burgonya/saláta, +kérhető majonéz, kechup.</div></div><div class="price">2550 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('friss-06.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">Fűszeres Csirke</div><div class="desc">Szárny, sült burgonya, savanyúság.</div></div><div class="price">3700 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('friss-07.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">Vödrös csirke krumplival</div><div class="desc">Fűszeres bundázott csirke, sült burgonya, kechup/BBQ szószs.</div></div><div class="price">3850 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('friss-08.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">Vödrös csirke hagymakarikával</div><div class="desc">Fűszeres bundázott csirke, hagymakarika, kechup/majonéz/BBQszósz.</div></div><div class="price">4200 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('friss-09.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">Cordon Blue</div><div class="desc">2db sajttal-sonkával töltött hús, sült burgonya, savanyúság.</div></div><div class="price">3800 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('friss-10.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">Hekk</div><div class="desc">Kérhető köretek: sült burgonya, saláta, savanyúság, kenyér.</div></div><div class="price">800 Ft/10 dkg</div></div></div>
+		  <div class="card"><div class="thumb" style="background-image:url('friss-11.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">Sült Virsli</div><div class="desc"> 1 pár virsli, kenyér, mustár/torma.</div></div><div class="price">1150 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('friss-12.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">Sült Debreceni</div><div class="desc">1 pár debreceni, kenyér, mustár/torma.</div></div><div class="price">1350 Ft</div></div></div>
+		  <div class="card"><div class="thumb" style="background-image:url('friss-13.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">Sült Burgonya</div><div class="desc">Leirás.</div></div><div class="price">850 Ft</div></div></div>
+		  <div class="card"><div class="thumb" style="background-image:url('friss-14.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">Sajtos Sült Burgonya</div><div class="desc">Leirás.</div></div><div class="price">1350 Ft</div></div></div>
+		  <div class="card"><div class="thumb" style="background-image:url('friss-15.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">Savanyúság</div><div class="desc">Savanyúuborka, kovászosuborka, vegyes savanyúság.</div></div><div class="price">650 Ft</div></div></div>
+		  <div class="card"><div class="thumb" style="background-image:url('friss-16.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">Extra szósz</div><div class="desc">Választható szószok mustár, majonéz, ketchup.</div></div><div class="price">200 Ft</div></div></div>
         </div>
       </section>
 
-      <!-- =========================
-           SALÁTÁK (6 kép: sal-01.jpg ... sal-06.jpg)
-           ========================= -->
+      <!-- GYROS -->
+      <section class="block" id="gyros">
+        <h3>Gyros</h3>
+        <div class="grid">
+          <div class="card"><div class="thumb" style="background-image:url('gyros-01.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">Gyros tál</div><div class="desc">Gyros hús, sült burgonya, saláta, öntet.</div></div><div class="price">3250 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('gyros-02.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">Gyros sült burgonyával</div><div class="desc">Gyros hús, sült burgonya, öntet.</div></div><div class="price">3000 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('gyros-03.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">Gyros salátával</div><div class="desc">Gyros hús, saláta, öntet.</div></div><div class="price">2850 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('gyros-04.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">Gyros olivával és fetával</div><div class="desc">Gyros tál, oliva bogyó, feta sajt.</div></div><div class="price">3500 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('gyros-05.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">Sajtos Gyros tál</div><div class="desc">Gyros tál, reszelt sajt.</div></div><div class="price">4000 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('gyros-06.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">Gyros pitában</div><div class="desc">Leírás.</div></div><div class="price">1750 Ft</div></div></div>
+          <!--
+		  <div class="card"><div class="thumb" style="background-image:url('gyros-07.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">GYROS-07 NÉV</div><div class="desc">Leírás.</div></div><div class="price">0 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('gyros-08.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">GYROS-08 NÉV</div><div class="desc">Leírás.</div></div><div class="price">0 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('gyros-09.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">GYROS-09 NÉV</div><div class="desc">Leírás.</div></div><div class="price">0 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('gyros-10.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">GYROS-10 NÉV</div><div class="desc">Leírás.</div></div><div class="price">0 Ft</div></div></div>
+          -->
+		</div>
+      </section>
+
+      <!-- TORTILLA -->
+      <section class="block" id="tortilla">
+        <h3>Tortilla</h3>
+        <div class="grid">
+          <div class="card"><div class="thumb" style="background-image:url('tor-01.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">Zöldséges Tortilla</div><div class="desc">Tortilla lap, jégsaláta/káposzta, uborka, paradicsom, kukorica, hagyma, sajt, öntet.</div></div><div class="price">1650 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('tor-02.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">Csirkés Tortilla</div><div class="desc">Tortilla lap, jégsaláta/káposzta, uborka, paradicsom, sajt, rántott csirkemell csíkok, öntet.</div></div><div class="price">2000 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('tor-03.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">Gyrosos Tortilla</div><div class="desc">Tortilla lap, jégsaláta/káposzta, uborka, paradicsom, hagyma, feta sajt, gyros hús, öntet.</div></div><div class="price">2200 Ft</div></div></div>
+          <!--
+		  <div class="card"><div class="thumb" style="background-image:url('tor-04.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">TOR-04 NÉV</div><div class="desc">Leírás.</div></div><div class="price">0 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('tor-05.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">TOR-05 NÉV</div><div class="desc">Leírás.</div></div><div class="price">0 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('tor-06.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">TOR-06 NÉV</div><div class="desc">Leírás.</div></div><div class="price">0 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('tor-07.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">TOR-07 NÉV</div><div class="desc">Leírás.</div></div><div class="price">0 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('tor-08.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">TOR-08 NÉV</div><div class="desc">Leírás.</div></div><div class="price">0 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('tor-09.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">TOR-09 NÉV</div><div class="desc">Leírás.</div></div><div class="price">0 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('tor-10.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">TOR-10 NÉV</div><div class="desc">Leírás.</div></div><div class="price">0 Ft</div></div></div>
+          -->
+		</div>
+      </section>
+
+      <!-- SALÁTÁK (marad a sal-xx) -->
       <section class="block" id="salatak">
         <h3>Saláták</h3>
-
         <div class="grid">
-          <div class="card">
-            <div class="thumb" style="background-image:url('sal-01.jpg')"></div>
-            <div class="info"><div style="min-width:0"><div class="name">SAL-01 NÉV</div><div class="desc">Rövid leírás (opcionális).</div></div><div class="price">0 Ft</div></div>
-          </div>
-
-          <div class="card">
-            <div class="thumb" style="background-image:url('sal-02.jpg')"></div>
-            <div class="info"><div style="min-width:0"><div class="name">SAL-02 NÉV</div><div class="desc">Rövid leírás (opcionális).</div></div><div class="price">0 Ft</div></div>
-          </div>
-
-          <div class="card">
-            <div class="thumb" style="background-image:url('sal-03.jpg')"></div>
-            <div class="info"><div style="min-width:0"><div class="name">SAL-03 NÉV</div><div class="desc">Rövid leírás (opcionális).</div></div><div class="price">0 Ft</div></div>
-          </div>
-
-          <div class="card">
-            <div class="thumb" style="background-image:url('sal-04.jpg')"></div>
-            <div class="info"><div style="min-width:0"><div class="name">SAL-04 NÉV</div><div class="desc">Rövid leírás (opcionális).</div></div><div class="price">0 Ft</div></div>
-          </div>
-
-          <div class="card">
-            <div class="thumb" style="background-image:url('sal-05.jpg')"></div>
-            <div class="info"><div style="min-width:0"><div class="name">SAL-05 NÉV</div><div class="desc">Rövid leírás (opcionális).</div></div><div class="price">0 Ft</div></div>
-          </div>
-
-          <div class="card">
-            <div class="thumb" style="background-image:url('sal-06.jpg')"></div>
-            <div class="info"><div style="min-width:0"><div class="name">SAL-06 NÉV</div><div class="desc">Rövid leírás (opcionális).</div></div><div class="price">0 Ft</div></div>
-          </div>
-        </div>
+          <div class="card"><div class="thumb" style="background-image:url('sal-01.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">Friss vegyes saláta</div><div class="desc">Jégsaláta/káposzta, uborka, paradicsom, kukorica, hagyma, öntet.</div></div><div class="price">990 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('sal-02.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">Görög saláta</div><div class="desc">Jégsaláta/káposzta, uborka, paradicsom, hagyma, feta sajt, oliva bogyó, öntet.</div></div><div class="price">1750 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('sal-03.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">Panírozott Csirkemell saláta</div><div class="desc">Jégsaláta/káposzta, uborka, paradicsom, kukorica, panírozott csirkemell csíkok, öntet.</div></div><div class="price">1950 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('sal-04.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">Tonhal Saláta</div><div class="desc">Jégsaláta/káposzta, uborka, paradicsom, kukorica, tonhal önte.</div></div><div class="price">2000 Ft</div></div></div>
+          <!--
+		  <div class="card"><div class="thumb" style="background-image:url('sal-05.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">SAL-05 NÉV</div><div class="desc">Leírás.</div></div><div class="price">0 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('sal-06.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">SAL-06 NÉV</div><div class="desc">Leírás.</div></div><div class="price">0 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('sal-07.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">SAL-07 NÉV</div><div class="desc">Leírás.</div></div><div class="price">0 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('sal-08.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">SAL-08 NÉV</div><div class="desc">Leírás.</div></div><div class="price">0 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('sal-09.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">SAL-09 NÉV</div><div class="desc">Leírás.</div></div><div class="price">0 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('sal-10.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">SAL-10 NÉV</div><div class="desc">Leírás.</div></div><div class="price">0 Ft</div></div></div>
+          -->
+	   </div>
       </section>
 
-      <!-- =========================
-           HAMBURGEREK (6 kép: ham-01.jpg ... ham-06.jpg)
-           ========================= -->
-      <section class="block" id="hamburgerek">
-        <h3>Hamburgerek</h3>
-
+      <!-- WIMPI -->
+      <section class="block" id="wimpi">
+        <h3>Wimpi</h3>
         <div class="grid">
-          <div class="card">
-            <div class="thumb" style="background-image:url('bur-01.jpg')"></div>
-            <div class="info"><div style="min-width:0"><div class="name">HAM-01 NÉV</div><div class="desc">Rövid leírás (opcionális).</div></div><div class="price">0 Ft</div></div>
-          </div>
+          <div class="card"><div class="thumb" style="background-image:url('wim-01.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">Klaszikus Wimpi</div><div class="desc">Kifli, virsli, sajt, uborka, paradicsom, saláta, kechup, mustár, majonéz.</div></div><div class="price">1700 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('wim-02.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">Amerikai Wimpi</div><div class="desc">Kifli, virsli, pirított hagyma, savanyú uborka, kechup, mustár, majonéz.</div></div><div class="price">2150 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('wim-03.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">Hot-Dog</div><div class="desc">Leírás.</div></div><div class="price">950 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('wim-04.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">Sajtos Hot-Dog</div><div class="desc">Leírás.</div></div><div class="price">1250 Ft</div></div></div>
+          <!--
+		  <div class="card"><div class="thumb" style="background-image:url('wim-05.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">WIM-05 NÉV</div><div class="desc">Leírás.</div></div><div class="price">0 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('wim-06.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">WIM-06 NÉV</div><div class="desc">Leírás.</div></div><div class="price">0 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('wim-07.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">WIM-07 NÉV</div><div class="desc">Leírás.</div></div><div class="price">0 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('wim-08.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">WIM-08 NÉV</div><div class="desc">Leírás.</div></div><div class="price">0 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('wim-09.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">WIM-09 NÉV</div><div class="desc">Leírás.</div></div><div class="price">0 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('wim-10.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">WIM-10 NÉV</div><div class="desc">Leírás.</div></div><div class="price">0 Ft</div></div></div>
+          -->
+		</div>
+      </section>
 
-          <div class="card">
-            <div class="thumb" style="background-image:url('bur-02.jpg')"></div>
-            <div class="info"><div style="min-width:0"><div class="name">HAM-02 NÉV</div><div class="desc">Rövid leírás (opcionális).</div></div><div class="price">0 Ft</div></div>
-          </div>
+      <!-- GYEREK MENÜ -->
+      <section class="block" id="gyerek">
+        <h3>Gyerek menü</h3>
+        <div class="grid">
+          <div class="card"><div class="thumb" style="background-image:url('gyer-01.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">Dino</div><div class="desc">Dino falatkák, sült burgonya, szívószálas üdítő, ajándék.</div></div><div class="price">2450 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('gyer-02.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">Nugget’s</div><div class="desc">Nugget’s falatkák, sült burgonya, szívószálas üdítő, ajándék.</div></div><div class="price">2550 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('gyer-03.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">Sajt</div><div class="desc">Rántott sajt, sült burgonya, szívószálas üdítő, ajándék.</div></div><div class="price">2350 Ft</div></div></div>
+          <!--
+		  <div class="card"><div class="thumb" style="background-image:url('gyer-04.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">GYER-04 NÉV</div><div class="desc">Leírás.</div></div><div class="price">0 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('gyer-05.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">GYER-05 NÉV</div><div class="desc">Leírás.</div></div><div class="price">0 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('gyer-06.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">GYER-06 NÉV</div><div class="desc">Leírás.</div></div><div class="price">0 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('gyer-07.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">GYER-07 NÉV</div><div class="desc">Leírás.</div></div><div class="price">0 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('gyer-08.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">GYER-08 NÉV</div><div class="desc">Leírás.</div></div><div class="price">0 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('gyer-09.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">GYER-09 NÉV</div><div class="desc">Leírás.</div></div><div class="price">0 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('gyer-10.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">GYER-10 NÉV</div><div class="desc">Leírás.</div></div><div class="price">0 Ft</div></div></div>
+          -->
+		</div>
+      </section>
 
-          <div class="card">
-            <div class="thumb" style="background-image:url('bur-03.jpg')"></div>
-            <div class="info"><div style="min-width:0"><div class="name">HAM-03 NÉV</div><div class="desc">Rövid leírás (opcionális).</div></div><div class="price">0 Ft</div></div>
-          </div>
+      <!-- PALACSINTA -->
+      <section class="block" id="palacsinta">
+        <h3>Palacsinta</h3>
+        <div class="grid">
+          <div class="card"><div class="thumb" style="background-image:url('pal-01.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">Kakaós</div><div class="desc">Leírás.</div></div><div class="price">350 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('pal-02.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">Fahéjas</div><div class="desc">Leírás.</div></div><div class="price">350 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('pal-03.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">Lekváros</div><div class="desc">Leírás.</div></div><div class="price">400 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('pal-04.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">Nutellás</div><div class="desc">Leírás.</div></div><div class="price">400 Ft</div></div></div>
+		  <!--
+          <div class="card"><div class="thumb" style="background-image:url('pal-05.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">PAL-05 NÉV</div><div class="desc">Leírás.</div></div><div class="price">0 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('pal-06.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">PAL-06 NÉV</div><div class="desc">Leírás.</div></div><div class="price">0 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('pal-07.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">PAL-07 NÉV</div><div class="desc">Leírás.</div></div><div class="price">0 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('pal-08.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">PAL-08 NÉV</div><div class="desc">Leírás.</div></div><div class="price">0 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('pal-09.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">PAL-09 NÉV</div><div class="desc">Leírás.</div></div><div class="price">0 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('pal-10.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">PAL-10 NÉV</div><div class="desc">Leírás.</div></div><div class="price">0 Ft</div></div></div>
+          -->
+		</div>
+      </section>
 
-          <div class="card">
-            <div class="thumb" style="background-image:url('bur-04.jpg')"></div>
-            <div class="info"><div style="min-width:0"><div class="name">HAM-04 NÉV</div><div class="desc">Rövid leírás (opcionális).</div></div><div class="price">0 Ft</div></div>
-          </div>
-
-          <div class="card">
-            <div class="thumb" style="background-image:url('bur-05.jpg')"></div>
-            <div class="info"><div style="min-width:0"><div class="name">HAM-05 NÉV</div><div class="desc">Rövid leírás (opcionális).</div></div><div class="price">0 Ft</div></div>
-          </div>
-
-          <div class="card">
-            <div class="thumb" style="background-image:url('bur-06.jpg')"></div>
-            <div class="info"><div style="min-width:0"><div class="name">HAM-06 NÉV</div><div class="desc">Rövid leírás (opcionális).</div></div><div class="price">0 Ft</div></div>
-          </div>
-        </div>
+      <!-- NASIK -->
+      <section class="block" id="nasik">
+        <h3>Nasik</h3>
+        <div class="grid">
+          <div class="card"><div class="thumb" style="background-image:url('nas-01.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">Cheetos Chips</div><div class="desc">Leírás.</div></div><div class="price">500 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('nas-02.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">Lay's Chips</div><div class="desc">Leírás.</div></div><div class="price">700 Ft</div></div></div>
+          <!--
+		  <div class="card"><div class="thumb" style="background-image:url('nas-03.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">NAS-03 NÉV</div><div class="desc">Leírás.</div></div><div class="price">0 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('nas-04.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">NAS-04 NÉV</div><div class="desc">Leírás.</div></div><div class="price">0 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('nas-05.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">NAS-05 NÉV</div><div class="desc">Leírás.</div></div><div class="price">0 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('nas-06.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">NAS-06 NÉV</div><div class="desc">Leírás.</div></div><div class="price">0 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('nas-07.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">NAS-07 NÉV</div><div class="desc">Leírás.</div></div><div class="price">0 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('nas-08.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">NAS-08 NÉV</div><div class="desc">Leírás.</div></div><div class="price">0 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('nas-09.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">NAS-09 NÉV</div><div class="desc">Leírás.</div></div><div class="price">0 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('nas-10.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">NAS-10 NÉV</div><div class="desc">Leírás.</div></div><div class="price">0 Ft</div></div></div>
+          -->
+		</div>
       </section>
 
     </div>
@@ -546,12 +606,11 @@
   </footer>
 
   <script>
-    // Év
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    // ✅ Mobil chip aktív állapot
     const chips = Array.from(document.querySelectorAll(".chip"));
-    const sections = ["halas","salatak","hamburgerek"].map(id => document.getElementById(id)).filter(Boolean);
+    const sectionIds = ["frissen","gyros","tortilla","salatak","wimpi","gyerek","palacsinta","nasik"];
+    const sections = sectionIds.map(id => document.getElementById(id)).filter(Boolean);
 
     const setActive = (id) => {
       chips.forEach(c => c.classList.toggle("active", c.dataset.chip === id));
@@ -572,20 +631,22 @@
 
     sections.forEach(s => io.observe(s));
     chips.forEach(c => c.addEventListener("click", () => setActive(c.dataset.chip)));
-    setActive("halas");
+    setActive("frissen");
   </script>
 
   <!--
-    ✅ MIVEL A KÉPEK AZ index.html MELLÉ KERÜLNEK:
-    - Hero háttér: menu-hero.jpg
-    - Halak: hal-01.jpg ... hal-06.jpg
-    - Saláták: sal-01.jpg ... sal-06.jpg
-    - Hamburgerek: ham-01.jpg ... ham-06.jpg
+    ✅ KÉPEK AZ index.html MELLÉ:
+    - menu-hero.jpg
 
-    ✅ LINK HELYE:
-    - Főoldal gomb: href="PASTE_FOOLDA L_LINK_HERE"
-      (cseréld pl. index.html-re vagy a webcímedre)
+    10-10 kép / kategória:
+    - friss-01.jpg ... friss-10.jpg
+    - gyros-01.jpg ... gyros-10.jpg
+    - tor-01.jpg ... tor-10.jpg
+    - sal-01.jpg ... sal-10.jpg
+    - wim-01.jpg ... wim-10.jpg
+    - gyer-01.jpg ... gyer-10.jpg
+    - pal-01.jpg ... pal-10.jpg
+    - nas-01.jpg ... nas-10.jpg
   -->
 </body>
-
 </html>
