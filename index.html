@@ -22,6 +22,7 @@
       --gold:#b68a45;
       --gold-soft:#d3b27a;
       --gold-light:#ead4ab;
+      --gold-deep:#8f6831;
       --shadow-sm:0 10px 30px rgba(0,0,0,.08);
       --shadow:0 18px 50px rgba(0,0,0,.12);
       --shadow-lg:0 28px 75px rgba(0,0,0,.18);
@@ -449,57 +450,77 @@
     .grid{
       display:grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
+      gap: 22px;
       padding-bottom: 18px;
     }
 
+    /* =========================
+       MÉG PRÉMIUMABB KÁRTYÁK
+       ========================= */
     .card{
       position:relative;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.54), rgba(255,255,255,.34));
-      border: 1px solid rgba(255,255,255,.34);
-      border-radius: 22px;
+      border-radius: 26px;
       overflow:hidden;
-      box-shadow: var(--shadow-sm);
-      transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
       isolation:isolate;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.72), rgba(255,255,255,.28) 58%, rgba(244,236,225,.42)),
+        linear-gradient(135deg, rgba(234,212,171,.16), rgba(255,255,255,.06));
+      border: 1px solid rgba(255,255,255,.52);
+      box-shadow:
+        0 14px 38px rgba(0,0,0,.10),
+        0 26px 60px rgba(0,0,0,.08),
+        inset 0 1px 0 rgba(255,255,255,.58);
+      transition:
+        transform .28s ease,
+        box-shadow .28s ease,
+        border-color .28s ease;
+      backdrop-filter: blur(12px) saturate(130%);
+      -webkit-backdrop-filter: blur(12px) saturate(130%);
     }
 
     .card::before{
       content:"";
       position:absolute;
       inset:0;
-      background: linear-gradient(125deg, transparent 20%, rgba(255,255,255,.20) 38%, transparent 55%);
-      transform: translateX(-120%);
-      transition: transform .7s ease;
+      background:
+        linear-gradient(125deg, transparent 14%, rgba(255,255,255,.34) 34%, rgba(255,255,255,.07) 46%, transparent 58%);
+      transform: translateX(-130%);
+      transition: transform .9s ease;
       pointer-events:none;
-      z-index:2;
+      z-index:3;
     }
 
     .card::after{
       content:"";
       position:absolute;
       inset:0;
-      border-radius:22px;
-      border:1px solid rgba(182,138,69,.10);
+      border-radius:26px;
+      padding:1px;
+      background: linear-gradient(135deg, rgba(255,255,255,.45), rgba(182,138,69,.30), rgba(255,255,255,.12));
+      -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
       pointer-events:none;
-      z-index:1;
+      z-index:2;
     }
 
     .card:hover{
-      transform: translateY(-6px);
-      box-shadow: 0 22px 48px rgba(0,0,0,.14);
-      border-color: rgba(255,255,255,.55);
+      transform: translateY(-8px) scale(1.01);
+      box-shadow:
+        0 24px 58px rgba(0,0,0,.14),
+        0 34px 80px rgba(182,138,69,.10),
+        inset 0 1px 0 rgba(255,255,255,.7);
+      border-color: rgba(255,255,255,.7);
     }
 
     .card:hover::before{
-      transform: translateX(120%);
+      transform: translateX(130%);
     }
 
     .thumb{
-      height: 205px;
+      height: 220px;
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
@@ -508,49 +529,80 @@
       overflow:hidden;
     }
 
-    .thumb::after{
+    .thumb::before{
       content:"";
       position:absolute;
       inset:0;
       background:
-        linear-gradient(180deg, rgba(255,255,255,.05), transparent 35%, rgba(0,0,0,.16)),
-        radial-gradient(circle at 20% 15%, rgba(255,255,255,.14), transparent 30%);
+        linear-gradient(180deg, rgba(12,9,7,.04), transparent 35%, rgba(12,9,7,.32)),
+        radial-gradient(circle at 20% 15%, rgba(255,255,255,.18), transparent 30%);
       pointer-events:none;
+      z-index:1;
+    }
+
+    .thumb::after{
+      content:"";
+      position:absolute;
+      left:0; right:0; bottom:0;
+      height:85px;
+      background: linear-gradient(180deg, transparent, rgba(18,12,8,.42));
+      pointer-events:none;
+      z-index:1;
     }
 
     .info{
-      padding: 15px 15px 17px;
+      position:relative;
+      z-index:4;
+      padding: 18px 18px 18px;
       display:flex;
       justify-content:space-between;
-      gap:12px;
+      gap:14px;
       align-items:flex-start;
-      position:relative;
-      z-index:3;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.14), rgba(255,255,255,.02));
+    }
+
+    .info > div:first-child{
+      min-width:0;
+      flex:1;
     }
 
     .name{
+      font-family:"Cormorant Garamond", serif;
       font-weight:700;
-      font-size:13px;
-      letter-spacing:.08em;
-      text-transform:uppercase;
-      line-height:1.35;
+      font-size:24px;
+      letter-spacing:.05em;
+      text-transform:none;
+      line-height:1.1;
+      color:#1b1510;
+      text-shadow: 0 1px 0 rgba(255,255,255,.25);
     }
 
     .desc{
-      margin-top: 7px;
-      font-size: 12px;
-      color: rgba(23,20,17,.62);
-      line-height: 1.55;
+      margin-top: 9px;
+      font-size: 12.5px;
+      color: rgba(23,20,17,.68);
+      line-height: 1.68;
+      max-width: 95%;
     }
 
     .price{
+      flex:0 0 auto;
       font-family:"Cormorant Garamond", serif;
       font-weight:700;
-      font-size:20px;
-      letter-spacing:.04em;
+      font-size:21px;
+      letter-spacing:.03em;
       white-space: nowrap;
-      color:#241b12;
-      text-shadow: 0 1px 0 rgba(255,255,255,.35);
+      color:#20160d;
+      padding: 10px 14px;
+      border-radius: 16px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.92), rgba(247,239,229,.80));
+      border:1px solid rgba(182,138,69,.28);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.82),
+        0 10px 22px rgba(182,138,69,.10);
+      text-shadow: 0 1px 0 rgba(255,255,255,.45);
     }
 
     section[id]{ scroll-margin-top: calc(var(--topbarH) + 14px); }
@@ -599,6 +651,7 @@
       .nav a{ font-size:10.5px; letter-spacing:.16em; }
       .hero h1{ font-size:46px; }
       .title-row h2{ font-size:28px; }
+      .name{ font-size:22px; }
     }
 
     @media (max-width: 980px){
@@ -609,7 +662,7 @@
       .hero{ min-height: 360px; }
       .hero h1{ font-size:42px; }
       .grid{ grid-template-columns: repeat(2, 1fr); }
-      .thumb{ height: 180px; }
+      .thumb{ height: 200px; }
     }
 
     @media (max-width: 560px){
@@ -659,19 +712,30 @@
 
       .grid{
         grid-template-columns: 1fr;
-        gap:16px;
+        gap:18px;
       }
 
       .thumb{
-        height: 195px;
+        height: 210px;
       }
 
       .info{
-        padding: 14px 14px 16px;
+        padding: 16px;
+        gap:10px;
+      }
+
+      .name{
+        font-size:22px;
+      }
+
+      .desc{
+        font-size:12.5px;
       }
 
       .price{
         font-size:19px;
+        padding: 8px 12px;
+        border-radius: 14px;
       }
     }
 
@@ -752,90 +816,90 @@
       <section class="block reveal" id="frissen">
         <h3>Frissen sültek</h3>
         <div class="grid">
-          <div class="card"><div class="thumb" style="background-image:url('friss-01.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">Rántott sajt</div><div class="desc">2 db rántott sajt, sült burgonya, kérhető ketchup vagy majonéz.</div></div><div class="price">2850 Ft</div></div></div>
-          <div class="card"><div class="thumb" style="background-image:url('friss-02.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">Rántott csirkemell</div><div class="desc">2 db csirkemell, sült burgonya, savanyúság.</div></div><div class="price">3000 Ft</div></div></div>
-          <div class="card"><div class="thumb" style="background-image:url('friss-03.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">Rántott hagymakarika</div><div class="desc">12 db ropogós hagymakarika.</div></div><div class="price">1550 Ft</div></div></div>
-          <div class="card"><div class="thumb" style="background-image:url('friss-04.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">Rántott karfiol</div><div class="desc">20 dkg karfiol, sült burgonya vagy saláta, kérhető majonéz vagy ketchup.</div></div><div class="price">2550 Ft</div></div></div>
-          <div class="card"><div class="thumb" style="background-image:url('friss-05.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">Rántott gomba</div><div class="desc">20 dkg gombafej, sült burgonya vagy saláta, kérhető majonéz vagy ketchup.</div></div><div class="price">2550 Ft</div></div></div>
-          <div class="card"><div class="thumb" style="background-image:url('friss-06.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">Fűszeres csirke</div><div class="desc">Szárny, sült burgonya, savanyúság.</div></div><div class="price">3700 Ft</div></div></div>
-          <div class="card"><div class="thumb" style="background-image:url('friss-07.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">Vödrös csirke krumplival</div><div class="desc">Fűszeres bundázott csirke, sült burgonya, ketchup vagy BBQ szósz.</div></div><div class="price">3850 Ft</div></div></div>
-          <div class="card"><div class="thumb" style="background-image:url('friss-08.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">Vödrös csirke hagymakarikával</div><div class="desc">Fűszeres bundázott csirke, hagymakarika, ketchup, majonéz vagy BBQ szósz.</div></div><div class="price">4200 Ft</div></div></div>
-          <div class="card"><div class="thumb" style="background-image:url('friss-09.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">Cordon Bleu</div><div class="desc">2 db sajttal és sonkával töltött hús, sült burgonya, savanyúság.</div></div><div class="price">3800 Ft</div></div></div>
-          <div class="card"><div class="thumb" style="background-image:url('friss-10.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">Hekk</div><div class="desc">Kérhető köret: sült burgonya, saláta, savanyúság vagy kenyér.</div></div><div class="price">800 Ft / 10 dkg</div></div></div>
-          <div class="card"><div class="thumb" style="background-image:url('friss-11.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">Sült virsli</div><div class="desc">1 pár virsli, kenyér, mustár vagy torma.</div></div><div class="price">1150 Ft</div></div></div>
-          <div class="card"><div class="thumb" style="background-image:url('friss-12.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">Sült debreceni</div><div class="desc">1 pár debreceni, kenyér, mustár vagy torma.</div></div><div class="price">1350 Ft</div></div></div>
-          <div class="card"><div class="thumb" style="background-image:url('friss-13.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">Sült burgonya</div><div class="desc">Aranybarnára sütve.</div></div><div class="price">850 Ft</div></div></div>
-          <div class="card"><div class="thumb" style="background-image:url('friss-14.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">Sajtos sült burgonya</div><div class="desc">Frissen sütve, sajttal megszórva.</div></div><div class="price">1350 Ft</div></div></div>
-          <div class="card"><div class="thumb" style="background-image:url('friss-15.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">Savanyúság</div><div class="desc">Savanyú uborka, kovászos uborka vagy vegyes savanyúság.</div></div><div class="price">650 Ft</div></div></div>
-          <div class="card"><div class="thumb" style="background-image:url('friss-16.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">Extra szósz</div><div class="desc">Választható: mustár, majonéz, ketchup.</div></div><div class="price">200 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('friss-01.jpg')"></div><div class="info"><div><div class="name">Rántott sajt</div><div class="desc">2 db rántott sajt, sült burgonya, kérhető ketchup vagy majonéz.</div></div><div class="price">2850 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('friss-02.jpg')"></div><div class="info"><div><div class="name">Rántott csirkemell</div><div class="desc">2 db csirkemell, sült burgonya, savanyúság.</div></div><div class="price">3000 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('friss-03.jpg')"></div><div class="info"><div><div class="name">Rántott hagymakarika</div><div class="desc">12 db ropogós hagymakarika.</div></div><div class="price">1550 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('friss-04.jpg')"></div><div class="info"><div><div class="name">Rántott karfiol</div><div class="desc">20 dkg karfiol, sült burgonya vagy saláta, kérhető majonéz vagy ketchup.</div></div><div class="price">2550 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('friss-05.jpg')"></div><div class="info"><div><div class="name">Rántott gomba</div><div class="desc">20 dkg gombafej, sült burgonya vagy saláta, kérhető majonéz vagy ketchup.</div></div><div class="price">2550 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('friss-06.jpg')"></div><div class="info"><div><div class="name">Fűszeres csirke</div><div class="desc">Szárny, sült burgonya, savanyúság.</div></div><div class="price">3700 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('friss-07.jpg')"></div><div class="info"><div><div class="name">Vödrös csirke krumplival</div><div class="desc">Fűszeres bundázott csirke, sült burgonya, ketchup vagy BBQ szósz.</div></div><div class="price">3850 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('friss-08.jpg')"></div><div class="info"><div><div class="name">Vödrös csirke hagymakarikával</div><div class="desc">Fűszeres bundázott csirke, hagymakarika, ketchup, majonéz vagy BBQ szósz.</div></div><div class="price">4200 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('friss-09.jpg')"></div><div class="info"><div><div class="name">Cordon Bleu</div><div class="desc">2 db sajttal és sonkával töltött hús, sült burgonya, savanyúság.</div></div><div class="price">3800 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('friss-10.jpg')"></div><div class="info"><div><div class="name">Hekk</div><div class="desc">Kérhető köret: sült burgonya, saláta, savanyúság vagy kenyér.</div></div><div class="price">800 Ft / 10 dkg</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('friss-11.jpg')"></div><div class="info"><div><div class="name">Sült virsli</div><div class="desc">1 pár virsli, kenyér, mustár vagy torma.</div></div><div class="price">1150 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('friss-12.jpg')"></div><div class="info"><div><div class="name">Sült debreceni</div><div class="desc">1 pár debreceni, kenyér, mustár vagy torma.</div></div><div class="price">1350 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('friss-13.jpg')"></div><div class="info"><div><div class="name">Sült burgonya</div><div class="desc">Aranybarnára sütve.</div></div><div class="price">850 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('friss-14.jpg')"></div><div class="info"><div><div class="name">Sajtos sült burgonya</div><div class="desc">Frissen sütve, sajttal megszórva.</div></div><div class="price">1350 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('friss-15.jpg')"></div><div class="info"><div><div class="name">Savanyúság</div><div class="desc">Savanyú uborka, kovászos uborka vagy vegyes savanyúság.</div></div><div class="price">650 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('friss-16.jpg')"></div><div class="info"><div><div class="name">Extra szósz</div><div class="desc">Választható: mustár, majonéz, ketchup.</div></div><div class="price">200 Ft</div></div></div>
         </div>
       </section>
 
       <section class="block reveal" id="gyros">
         <h3>Gyros</h3>
         <div class="grid">
-          <div class="card"><div class="thumb" style="background-image:url('gyros-01.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">Gyros tál</div><div class="desc">Gyros hús, sült burgonya, saláta, öntet.</div></div><div class="price">3250 Ft</div></div></div>
-          <div class="card"><div class="thumb" style="background-image:url('gyros-02.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">Gyros sült burgonyával</div><div class="desc">Gyros hús, sült burgonya, öntet.</div></div><div class="price">3000 Ft</div></div></div>
-          <div class="card"><div class="thumb" style="background-image:url('gyros-03.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">Gyros salátával</div><div class="desc">Gyros hús, saláta, öntet.</div></div><div class="price">2850 Ft</div></div></div>
-          <div class="card"><div class="thumb" style="background-image:url('gyros-04.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">Gyros olívával és fetával</div><div class="desc">Gyros tál, olívabogyó, feta sajt.</div></div><div class="price">3500 Ft</div></div></div>
-          <div class="card"><div class="thumb" style="background-image:url('gyros-05.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">Sajtos gyros tál</div><div class="desc">Gyros tál, reszelt sajt.</div></div><div class="price">4000 Ft</div></div></div>
-          <div class="card"><div class="thumb" style="background-image:url('gyros-06.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">Gyros pitában</div><div class="desc">Friss pita, gyros hús, zöldségek, öntet.</div></div><div class="price">1750 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('gyros-01.jpg')"></div><div class="info"><div><div class="name">Gyros tál</div><div class="desc">Gyros hús, sült burgonya, saláta, öntet.</div></div><div class="price">3250 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('gyros-02.jpg')"></div><div class="info"><div><div class="name">Gyros sült burgonyával</div><div class="desc">Gyros hús, sült burgonya, öntet.</div></div><div class="price">3000 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('gyros-03.jpg')"></div><div class="info"><div><div class="name">Gyros salátával</div><div class="desc">Gyros hús, saláta, öntet.</div></div><div class="price">2850 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('gyros-04.jpg')"></div><div class="info"><div><div class="name">Gyros olívával és fetával</div><div class="desc">Gyros tál, olívabogyó, feta sajt.</div></div><div class="price">3500 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('gyros-05.jpg')"></div><div class="info"><div><div class="name">Sajtos gyros tál</div><div class="desc">Gyros tál, reszelt sajt.</div></div><div class="price">4000 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('gyros-06.jpg')"></div><div class="info"><div><div class="name">Gyros pitában</div><div class="desc">Friss pita, gyros hús, zöldségek, öntet.</div></div><div class="price">1750 Ft</div></div></div>
         </div>
       </section>
 
       <section class="block reveal" id="tortilla">
         <h3>Tortilla</h3>
         <div class="grid">
-          <div class="card"><div class="thumb" style="background-image:url('tor-01.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">Zöldséges tortilla</div><div class="desc">Tortilla lap, jégsaláta vagy káposzta, uborka, paradicsom, kukorica, hagyma, sajt, öntet.</div></div><div class="price">1650 Ft</div></div></div>
-          <div class="card"><div class="thumb" style="background-image:url('tor-02.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">Csirkés tortilla</div><div class="desc">Tortilla lap, jégsaláta vagy káposzta, uborka, paradicsom, sajt, rántott csirkemell csíkok, öntet.</div></div><div class="price">2000 Ft</div></div></div>
-          <div class="card"><div class="thumb" style="background-image:url('tor-03.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">Gyrosos tortilla</div><div class="desc">Tortilla lap, jégsaláta vagy káposzta, uborka, paradicsom, hagyma, feta sajt, gyros hús, öntet.</div></div><div class="price">2200 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('tor-01.jpg')"></div><div class="info"><div><div class="name">Zöldséges tortilla</div><div class="desc">Tortilla lap, jégsaláta vagy káposzta, uborka, paradicsom, kukorica, hagyma, sajt, öntet.</div></div><div class="price">1650 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('tor-02.jpg')"></div><div class="info"><div><div class="name">Csirkés tortilla</div><div class="desc">Tortilla lap, jégsaláta vagy káposzta, uborka, paradicsom, sajt, rántott csirkemell csíkok, öntet.</div></div><div class="price">2000 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('tor-03.jpg')"></div><div class="info"><div><div class="name">Gyrosos tortilla</div><div class="desc">Tortilla lap, jégsaláta vagy káposzta, uborka, paradicsom, hagyma, feta sajt, gyros hús, öntet.</div></div><div class="price">2200 Ft</div></div></div>
         </div>
       </section>
 
       <section class="block reveal" id="salatak">
         <h3>Saláták</h3>
         <div class="grid">
-          <div class="card"><div class="thumb" style="background-image:url('sal-01.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">Friss vegyes saláta</div><div class="desc">Jégsaláta vagy káposzta, uborka, paradicsom, kukorica, hagyma, öntet.</div></div><div class="price">990 Ft</div></div></div>
-          <div class="card"><div class="thumb" style="background-image:url('sal-02.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">Görög saláta</div><div class="desc">Jégsaláta vagy káposzta, uborka, paradicsom, hagyma, feta sajt, olívabogyó, öntet.</div></div><div class="price">1750 Ft</div></div></div>
-          <div class="card"><div class="thumb" style="background-image:url('sal-03.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">Panírozott csirkemell saláta</div><div class="desc">Jégsaláta vagy káposzta, uborka, paradicsom, kukorica, panírozott csirkemell csíkok, öntet.</div></div><div class="price">1950 Ft</div></div></div>
-          <div class="card"><div class="thumb" style="background-image:url('sal-04.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">Tonhal saláta</div><div class="desc">Jégsaláta vagy káposzta, uborka, paradicsom, kukorica, tonhal, öntet.</div></div><div class="price">2000 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('sal-01.jpg')"></div><div class="info"><div><div class="name">Friss vegyes saláta</div><div class="desc">Jégsaláta vagy káposzta, uborka, paradicsom, kukorica, hagyma, öntet.</div></div><div class="price">990 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('sal-02.jpg')"></div><div class="info"><div><div class="name">Görög saláta</div><div class="desc">Jégsaláta vagy káposzta, uborka, paradicsom, hagyma, feta sajt, olívabogyó, öntet.</div></div><div class="price">1750 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('sal-03.jpg')"></div><div class="info"><div><div class="name">Panírozott csirkemell saláta</div><div class="desc">Jégsaláta vagy káposzta, uborka, paradicsom, kukorica, panírozott csirkemell csíkok, öntet.</div></div><div class="price">1950 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('sal-04.jpg')"></div><div class="info"><div><div class="name">Tonhal saláta</div><div class="desc">Jégsaláta vagy káposzta, uborka, paradicsom, kukorica, tonhal, öntet.</div></div><div class="price">2000 Ft</div></div></div>
         </div>
       </section>
 
       <section class="block reveal" id="wimpi">
         <h3>Wimpi</h3>
         <div class="grid">
-          <div class="card"><div class="thumb" style="background-image:url('wim-01.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">Klasszikus Wimpi</div><div class="desc">Kifli, virsli, sajt, uborka, paradicsom, saláta, ketchup, mustár, majonéz.</div></div><div class="price">1700 Ft</div></div></div>
-          <div class="card"><div class="thumb" style="background-image:url('wim-02.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">Amerikai Wimpi</div><div class="desc">Kifli, virsli, pirított hagyma, savanyú uborka, ketchup, mustár, majonéz.</div></div><div class="price">2150 Ft</div></div></div>
-          <div class="card"><div class="thumb" style="background-image:url('wim-03.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">Hot-Dog</div><div class="desc">Puha kifli, virsli, klasszikus szószokkal.</div></div><div class="price">950 Ft</div></div></div>
-          <div class="card"><div class="thumb" style="background-image:url('wim-04.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">Sajtos Hot-Dog</div><div class="desc">Hot-Dog sajttal gazdagítva.</div></div><div class="price">1250 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('wim-01.jpg')"></div><div class="info"><div><div class="name">Klasszikus Wimpi</div><div class="desc">Kifli, virsli, sajt, uborka, paradicsom, saláta, ketchup, mustár, majonéz.</div></div><div class="price">1700 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('wim-02.jpg')"></div><div class="info"><div><div class="name">Amerikai Wimpi</div><div class="desc">Kifli, virsli, pirított hagyma, savanyú uborka, ketchup, mustár, majonéz.</div></div><div class="price">2150 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('wim-03.jpg')"></div><div class="info"><div><div class="name">Hot-Dog</div><div class="desc">Puha kifli, virsli, klasszikus szószokkal.</div></div><div class="price">950 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('wim-04.jpg')"></div><div class="info"><div><div class="name">Sajtos Hot-Dog</div><div class="desc">Hot-Dog sajttal gazdagítva.</div></div><div class="price">1250 Ft</div></div></div>
         </div>
       </section>
 
       <section class="block reveal" id="gyerek">
         <h3>Gyerek menü</h3>
         <div class="grid">
-          <div class="card"><div class="thumb" style="background-image:url('gyer-01.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">Dino</div><div class="desc">Dino falatkák, sült burgonya, szívószálas üdítő, ajándék.</div></div><div class="price">2450 Ft</div></div></div>
-          <div class="card"><div class="thumb" style="background-image:url('gyer-02.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">Nugget’s</div><div class="desc">Nugget’s falatkák, sült burgonya, szívószálas üdítő, ajándék.</div></div><div class="price">2550 Ft</div></div></div>
-          <div class="card"><div class="thumb" style="background-image:url('gyer-03.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">Sajt</div><div class="desc">Rántott sajt, sült burgonya, szívószálas üdítő, ajándék.</div></div><div class="price">2350 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('gyer-01.jpg')"></div><div class="info"><div><div class="name">Dino</div><div class="desc">Dino falatkák, sült burgonya, szívószálas üdítő, ajándék.</div></div><div class="price">2450 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('gyer-02.jpg')"></div><div class="info"><div><div class="name">Nugget’s</div><div class="desc">Nugget’s falatkák, sült burgonya, szívószálas üdítő, ajándék.</div></div><div class="price">2550 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('gyer-03.jpg')"></div><div class="info"><div><div class="name">Sajt</div><div class="desc">Rántott sajt, sült burgonya, szívószálas üdítő, ajándék.</div></div><div class="price">2350 Ft</div></div></div>
         </div>
       </section>
 
       <section class="block reveal" id="palacsinta">
         <h3>Palacsinta</h3>
         <div class="grid">
-          <div class="card"><div class="thumb" style="background-image:url('pal-01.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">Kakaós</div><div class="desc">Frissen sütött, klasszikus kakaós palacsinta.</div></div><div class="price">350 Ft</div></div></div>
-          <div class="card"><div class="thumb" style="background-image:url('pal-02.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">Fahéjas</div><div class="desc">Lágy, édes, fahéjas töltelékkel.</div></div><div class="price">350 Ft</div></div></div>
-          <div class="card"><div class="thumb" style="background-image:url('pal-03.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">Lekváros</div><div class="desc">Gyümölcsös lekvárral töltve.</div></div><div class="price">400 Ft</div></div></div>
-          <div class="card"><div class="thumb" style="background-image:url('pal-04.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">Nutellás</div><div class="desc">Krémes mogyorós töltelékkel.</div></div><div class="price">400 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('pal-01.jpg')"></div><div class="info"><div><div class="name">Kakaós</div><div class="desc">Frissen sütött, klasszikus kakaós palacsinta.</div></div><div class="price">350 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('pal-02.jpg')"></div><div class="info"><div><div class="name">Fahéjas</div><div class="desc">Lágy, édes, fahéjas töltelékkel.</div></div><div class="price">350 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('pal-03.jpg')"></div><div class="info"><div><div class="name">Lekváros</div><div class="desc">Gyümölcsös lekvárral töltve.</div></div><div class="price">400 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('pal-04.jpg')"></div><div class="info"><div><div class="name">Nutellás</div><div class="desc">Krémes mogyorós töltelékkel.</div></div><div class="price">400 Ft</div></div></div>
         </div>
       </section>
 
       <section class="block reveal" id="nasik">
         <h3>Nasik</h3>
         <div class="grid">
-          <div class="card"><div class="thumb" style="background-image:url('nas-01.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">Cheetos chips</div><div class="desc">Ropogós nasi gyors harapnivalónak.</div></div><div class="price">500 Ft</div></div></div>
-          <div class="card"><div class="thumb" style="background-image:url('nas-02.jpg')"></div><div class="info"><div style="min-width:0"><div class="name">Lay’s chips</div><div class="desc">Klasszikus chips több alkalomra.</div></div><div class="price">700 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('nas-01.jpg')"></div><div class="info"><div><div class="name">Cheetos chips</div><div class="desc">Ropogós nasi gyors harapnivalónak.</div></div><div class="price">500 Ft</div></div></div>
+          <div class="card"><div class="thumb" style="background-image:url('nas-02.jpg')"></div><div class="info"><div><div class="name">Lay’s chips</div><div class="desc">Klasszikus chips több alkalomra.</div></div><div class="price">700 Ft</div></div></div>
         </div>
       </section>
 
